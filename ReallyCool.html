@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulačka na Premenu Jednotiek</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        form {
+            display: grid;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input[type="number"],
+        select {
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        p#result {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kalkulačka na Premenu Jednotiek</h1>
+    <form id="conversion-form">
+        <label for="value">Hodnota:</label>
+        <input type="number" id="value" name="value" step="any" required>
+        
+        <label for="base-unit">Základná jednotka:</label>
+        <select id="base-unit">
+            <option value="m">Meter (m)</option>
+            <option value="W">Watt (W)</option>
+            <option value="V">Volt (V)</option>
+            <option value="A">Ampér (A)</option>
+            <option value="l">Liter (l)</option>
+        </select>
+        
+        <label for="base-multiplier">Násobok/diel:</label>
+        <select id="base-multiplier">
+            <option value="1">Základná</option>
+            <option value="1000">Kilo (k)</option>
+            <option value="1000000">Mega (M)</option>
+            <option value="1000000000">Giga (G)</option>
+            <option value="1000000000000">Tera (T)</option>
+            <option value="0.001">Mili (m)</option>
+            <option value="0.000001">Mikro (µ)</option>
+            <option value="0.000000001">Nano (n)</option>
+            <option value="0.000000000001">Piko (p)</option>
+        </select>
+        
+        <label for="target-unit">Cieľová jednotka:</label>
+        <select id="target-unit">
+            <option value="m">Meter (m)</option>
+            <option value="W">Watt (W)</option>
+            <option value="V">Volt (V)</option>
+            <option value="A">Ampér (A)</option>
+            <option value="l">Liter (l)</option>
+        </select>
+        
+        <label for="target-multiplier">Násobok/diel:</label>
+        <select id="target-multiplier">
+            <option value="1">Základná</option>
+            <option value="1000">Kilo (k)</option>
+            <option value="1000000">Mega (M)</option>
+            <option value="1000000000">Giga (G)</option>
+            <option value="1000000000000">Tera (T)</option>
+            <option value="0.001">Mili (m)</option>
+            <option value="0.000001">Mikro (µ)</option>
+            <option value="0.000000001">Nano (n)</option>
+            <option value="0.000000000001">Piko (p)</option>
+        </select>
+        
+        <button type="button" onclick="convert()">Prepočítať</button>
+    </form>
+    
+    <h2>Výsledok:</h2>
+    <p id="result"></p>
+
+    <script>
+        function convert() {
+            const value = parseFloat(document.getElementById('value').value);
+            const baseUnit = document.getElementById('base-unit').value;
+            const baseMultiplier = parseFloat(document.getElementById('base-multiplier').value);
+            const targetUnit = document.getElementById('target-unit').value;
+            const targetMultiplier = parseFloat(document.getElementById('target-multiplier').value);
+
+            if (baseUnit === targetUnit) {
+                const result = (value * baseMultiplier) / targetMultiplier;
+                document.getElementById('result').innerText = result;
+            } else {
+                document.getElementById('result').innerText = 'Nie je možné prepočítať medzi rôznymi jednotkami.';
+            }
+        }
+    </script>
+</body>
+</html>
